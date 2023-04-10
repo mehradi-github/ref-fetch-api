@@ -1,7 +1,7 @@
 import fs from 'fs';
-import path from 'path';
+import path, { join } from 'path';
 import axios from 'axios';
-import { Verse } from './Models/models';
+import { ApiData, Verse } from './Models/models';
 import Translation from './data/Translation.json';
 
 interface Quran {
@@ -62,9 +62,13 @@ const fetchSurah = async (index: number) => {
   return await response.data['verses'];
 };
 const fetchSurahFromFile = (index: number) => {
-  let rawdata: Buffer = fs.readFileSync(`./data/verses/${index}.json`);
-  const data: any = rawdata.toJSON();
-  return data['verses'];
+  const pathLocal = path.join(
+    process.env.PWD!,
+    `src/data/verses/${index}.json`,
+  );
+  console.log(pathLocal);
+  let apiData: ApiData = JSON.parse(fs.readFileSync(pathLocal, 'utf8'));
+  return apiData.verses;
 };
 // const genFile = async (index: number, dir: string) => {
 //   fs.writeFileSync(path.join(dir, `${index}.json`), await fetchSurah(index));
