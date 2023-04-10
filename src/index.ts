@@ -61,6 +61,11 @@ const fetchSurah = async (index: number) => {
   );
   return await response.data['verses'];
 };
+const fetchSurahFromFile = (index: number) => {
+  let rawdata: Buffer = fs.readFileSync(`./data/verses/${index}.json`);
+  const data: any = rawdata.toJSON();
+  return data['verses'];
+};
 // const genFile = async (index: number, dir: string) => {
 //   fs.writeFileSync(path.join(dir, `${index}.json`), await fetchSurah(index));
 // };
@@ -73,7 +78,7 @@ const main = async () => {
   }
   for (let i = 113; i < 115; i++) {
     // await genFile(i, dir);
-    (await fetchSurah(i)).map((v: Verse) => {
+    fetchSurahFromFile(i).map((v: Verse) => {
       resultArr.push(getModel(v));
     });
   }
