@@ -80,7 +80,7 @@ const main = async () => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
-  for (let i = 113; i < 115; i++) {
+  for (let i = 1; i < 115; i++) {
     // await genFile(i, dir);
     fetchSurahFromFile(i).map((v: Verse) => {
       resultArr.push(getModel(v));
