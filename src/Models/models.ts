@@ -23,6 +23,13 @@ export interface Verse {
   page_number: number;
   juz_number: number;
   words: Word[];
+  translations: Trans[];
+}
+
+export interface Trans {
+  id: number;
+  resource_id: number;
+  text: string;
 }
 
 export interface Word {
